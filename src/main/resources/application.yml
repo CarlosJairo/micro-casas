@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: micro-casas
+  datasource:
+    url: jdbc:mysql://localhost/microservicio-casas
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
