@@ -4,7 +4,7 @@ import com.Hogar360.casas.category.domain.model.CategoryModel;
 import com.Hogar360.casas.category.infrastructure.entities.CategoryEntity;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "string")
+@Mapper(componentModel = "spring")
 public interface CategoryEntityMapper {
     CategoryEntity modelToEntity(CategoryModel categoryModel);
     CategoryModel entityToModel(CategoryEntity categoryEntity);

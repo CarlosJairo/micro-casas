@@ -17,7 +17,7 @@ public class BeanConfiguration {
     private final CategoryEntityMapper categoryEntityMapper;
 
     @Bean
-    public CategoryServicePort categoryServicePort () {
+    public CategoryServicePort categoryServicePort() {
         return new CategoryUseCase(categoryPersistencePort());
     }
 
@@ -25,7 +25,5 @@ public class BeanConfiguration {
     public CategoryPersistencePort categoryPersistencePort() {
         return new CategoryPersistenceAdapter(categoryRepository, categoryEntityMapper);
     }
-
-
 }
 
