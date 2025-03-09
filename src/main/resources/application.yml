@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /casas/api/v1
+
+spring:
+  application:
+    name: micro-casas
+  datasource:
+    url: jdbc:mysql://localhost/microservicio_casas
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
