@@ -2,7 +2,6 @@ package com.Hogar360.casas.category.infrastructure.adapters.persistence;
 
 import com.Hogar360.casas.category.domain.model.CategoryModel;
 import com.Hogar360.casas.category.domain.ports.out.CategoryPersistencePort;
-import com.Hogar360.casas.category.infrastructure.entities.CategoryEntity;
 import com.Hogar360.casas.category.infrastructure.mappers.CategoryEntityMapper;
 import com.Hogar360.casas.category.infrastructure.repositories.mysql.CategoryRepository;
 import com.Hogar360.casas.commons.configurations.utils.Constants;
@@ -18,7 +17,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CategoryPersistenceAdapter implements CategoryPersistencePort {
+public class CategoryServiceAdapter implements CategoryPersistencePort {
     private final CategoryRepository categoryRepository;
     private final CategoryEntityMapper categoryEntityMapper;
 

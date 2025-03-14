@@ -5,6 +5,7 @@ import com.Hogar360.casas.category.application.dto.response.CategoryResponse;
 import com.Hogar360.casas.category.application.dto.response.SaveCategoryResponse;
 import com.Hogar360.casas.category.application.mappers.CategoryDtoMapper;
 import com.Hogar360.casas.category.application.service.CategoryService;
+import com.Hogar360.casas.category.domain.ports.in.CategoryServicePort;
 import com.Hogar360.casas.category.domain.ports.out.CategoryPersistencePort;
 import com.Hogar360.casas.commons.configurations.utils.Constants;
 import com.Hogar360.casas.commons.configurations.utils.DateTimeUtil;
@@ -17,12 +18,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryPersistencePort categoryPersistencePort;
+    private final CategoryServicePort categoryServicePort;
     private final CategoryDtoMapper categoryDtoMapper;
 
     @Override
     public SaveCategoryResponse saveCategory(SaveCategoryRequest saveCategoryRequest) {
-        categoryPersistencePort.saveCategory(
+        categoryServicePort.saveCategory(
                 categoryDtoMapper.requestToModel(saveCategoryRequest));
 
         return new SaveCategoryResponse(Constants.SAVE_CATEGORY_RESPONSE_MESSAGE,
@@ -31,6 +32,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc) {
-        return categoryDtoMapper.modelListToResponseList(categoryPersistencePort.getCategories(page, size, orderAsc));
+        return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategories(page, size, orderAsc));
     }
 }

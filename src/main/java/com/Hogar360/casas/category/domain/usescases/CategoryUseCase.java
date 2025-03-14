@@ -2,13 +2,13 @@ package com.Hogar360.casas.category.domain.usescases;
 
 import com.Hogar360.casas.category.domain.exceptions.CategoryAlreadyCreated;
 import com.Hogar360.casas.category.domain.model.CategoryModel;
-import com.Hogar360.casas.category.domain.ports.in.CategoryServicePort;
 import com.Hogar360.casas.category.domain.ports.out.CategoryPersistencePort;
+import com.Hogar360.casas.category.domain.utils.ValidationUtils;
 import com.Hogar360.casas.category.domain.utils.constants.DomainConstants;
 
 import java.util.List;
 
-public class CategoryUseCase implements CategoryServicePort {
+public class CategoryUseCase implements com.Hogar360.casas.category.domain.ports.in.CategoryServicePort {
     private final CategoryPersistencePort categoryPersistencePort;
 
     public CategoryUseCase(CategoryPersistencePort categoryPersistencePort) {
@@ -28,6 +28,7 @@ public class CategoryUseCase implements CategoryServicePort {
 
     @Override
     public List<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
+        ValidationUtils.validatePaginationParams(page, size, orderAsc);
         return categoryPersistencePort.getCategories(page, size, orderAsc);
     }
 }
