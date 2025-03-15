@@ -1,10 +1,11 @@
 package com.Hogar360.casas.commons.configurations.beans;
 
-import com.Hogar360.casas.category.domain.ports.out.CategoryPersistencePort;
-import com.Hogar360.casas.category.domain.usescases.CategoryUseCase;
-import com.Hogar360.casas.category.infrastructure.adapters.persistence.CategoryServiceAdapter;
-import com.Hogar360.casas.category.infrastructure.mappers.CategoryEntityMapper;
-import com.Hogar360.casas.category.infrastructure.repositories.mysql.CategoryRepository;
+import com.Hogar360.casas.domain.ports.in.CategoryServicePort;
+import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
+import com.Hogar360.casas.domain.usescases.CategoryUseCase;
+import com.Hogar360.casas.infrastructure.adapters.persistence.CategoryServiceAdapter;
+import com.Hogar360.casas.infrastructure.mappers.CategoryEntityMapper;
+import com.Hogar360.casas.infrastructure.repositories.mysql.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ public class BeanConfiguration {
     private final CategoryEntityMapper categoryEntityMapper;
 
     @Bean
-    public com.Hogar360.casas.category.domain.ports.in.CategoryServicePort categoryServicePort() {
+    public CategoryServicePort categoryServicePort() {
         return new CategoryUseCase(categoryPersistencePort());
     }
 

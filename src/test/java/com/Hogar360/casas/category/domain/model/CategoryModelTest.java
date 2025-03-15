@@ -1,7 +1,8 @@
 package com.Hogar360.casas.category.domain.model;
 
-import com.Hogar360.casas.category.domain.exceptions.DescriptionMaxSizeExceededException;
-import com.Hogar360.casas.category.domain.exceptions.NameMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
+import com.Hogar360.casas.domain.model.CategoryModel;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
