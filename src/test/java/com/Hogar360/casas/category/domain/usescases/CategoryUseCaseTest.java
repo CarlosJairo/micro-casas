@@ -1,9 +1,10 @@
 package com.Hogar360.casas.category.domain.usescases;
 
-import com.Hogar360.casas.category.domain.exceptions.CategoryAlreadyCreated;
-import com.Hogar360.casas.category.domain.model.CategoryModel;
-import com.Hogar360.casas.category.domain.ports.out.CategoryPersistencePort;
-import com.Hogar360.casas.category.domain.utils.constants.DomainConstants;
+import com.Hogar360.casas.domain.exceptions.CategoryAlreadyCreated;
+import com.Hogar360.casas.domain.model.CategoryModel;
+import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
+import com.Hogar360.casas.domain.usescases.CategoryUseCase;
+import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
