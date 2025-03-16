@@ -1,6 +1,6 @@
 package com.Hogar360.casas.infrastructure.exceptionHandlers;
 
-import com.Hogar360.casas.domain.exceptions.CategoryAlreadyCreated;
+import com.Hogar360.casas.domain.exceptions.EntityAlreadyExistsException;
 import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ public class ControllerAdvisor {
                 LocalDateTime.now()));
     }
 
-    @ExceptionHandler(CategoryAlreadyCreated.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryAlreadyExistsException(CategoryAlreadyCreated exception) {
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    public ResponseEntity<ExceptionResponse> handleCategoryAlreadyExistsException(EntityAlreadyExistsException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(ExceptionConstants.CATEGORY_EXISTS_EXCEPTION,
                 LocalDateTime.now()));
     }

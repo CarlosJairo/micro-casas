@@ -4,23 +4,24 @@ import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 
-import java.util.Objects;
-
-public class CategoryModel {
+public class CityModel {
     private Long id;
     private String name;
     private String description;
+    private final Long departmentId;
 
-    public CategoryModel(Long id, String name, String description) {
-        if (name.length() > 50) {
+    public CityModel(Long id, String name, String description, Long departmentId) {
+        if (name.length() > 50 ) {
             throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
         }
         if (description.length() > 90) {
             throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
+
         this.id = id;
         this.name = name;
         this.description = description;
+        this.departmentId = departmentId;
     }
 
     public Long getId() {
@@ -36,10 +37,10 @@ public class CategoryModel {
     }
 
     public void setName(String name) {
-        if (name.length() > 50) {
+        if (name.length() > 50 ) {
             throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
         }
-        this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
+        this.name = name;
     }
 
     public String getDescription() {
@@ -47,10 +48,13 @@ public class CategoryModel {
     }
 
     public void setDescription(String description) {
-        if (description.length() > 90) {
+        if (description.length() > 120) {
             throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
+        this.description = description;
+    }
 
-        this.description = Objects.requireNonNull(description, DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
+    public Long getDepartmentId() {
+        return departmentId;
     }
 }
