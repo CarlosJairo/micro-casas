@@ -6,7 +6,8 @@ public final class DomainConstants {
     }
 
     public static final String CATEGORY_NAME_ENTITY = "Category";
-    public static final String DEPARTMENT_NAME_ENTITY = "Category";
+    public static final String DEPARTMENT_NAME_ENTITY = "Department";
+    public static final String CITY_NAME_ENTITY = "Department";
 
     public static final String FIELD_NAME_NULL_MESSAGE = "Field 'name' can not be null";
     public static final String FIELD_DESCRIPTION_NULL_MESSAGE = "Field 'description' can not be null";

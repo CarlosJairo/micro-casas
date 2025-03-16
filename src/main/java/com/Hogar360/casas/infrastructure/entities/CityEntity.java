@@ -5,19 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DepartmentEntity {
+public class CityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<CityEntity> cities;
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private DepartmentEntity department;
 }

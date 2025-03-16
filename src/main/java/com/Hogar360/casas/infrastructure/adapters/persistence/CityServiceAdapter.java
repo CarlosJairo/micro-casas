@@ -1,0 +1,27 @@
+package com.Hogar360.casas.infrastructure.adapters.persistence;
+
+import com.Hogar360.casas.domain.model.CityModel;
+import com.Hogar360.casas.domain.ports.out.CityPersistencePort;
+import com.Hogar360.casas.infrastructure.mappers.CityEntityMapper;
+import com.Hogar360.casas.infrastructure.repositories.mysql.CityRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class CityServiceAdapter implements CityPersistencePort {
+    private final CityRepository cityRepository;
+    private final CityEntityMapper cityEntityMapper;
+
+    @Override
+    public void save(CityModel cityModel) {
+        cityRepository.save(cityEntityMapper.modelToEntity(cityModel));
+    }
+
+    @Override
+    public CityModel getCityByName(String cityName) {
+        return cityEntityMapper.entityToModel(cityRepository.findByName(cityName).orElse(null));
+    }
+}
