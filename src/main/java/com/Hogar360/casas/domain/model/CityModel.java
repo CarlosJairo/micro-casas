@@ -1,0 +1,4 @@
+package com.Hogar360.casas.domain.model;
+
+public class CityModel {
+}

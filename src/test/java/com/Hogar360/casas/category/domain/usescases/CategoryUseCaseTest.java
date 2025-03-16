@@ -1,6 +1,6 @@
 package com.Hogar360.casas.category.domain.usescases;
 
-import com.Hogar360.casas.domain.exceptions.CategoryAlreadyCreated;
+import com.Hogar360.casas.domain.exceptions.EntityAlreadyExistsException;
 import com.Hogar360.casas.domain.model.CategoryModel;
 import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
 import com.Hogar360.casas.domain.usescases.CategoryUseCase;
@@ -37,8 +37,8 @@ class CategoryUseCaseTest {
     void saveCategory_ShouldThrowException_WhenCategoryAlreadyExists() {
         when(categoryServicePort.getCategoryByName(testCategory.getName())).thenReturn(testCategory);
 
-        CategoryAlreadyCreated exception = assertThrows(
-                CategoryAlreadyCreated.class,
+        EntityAlreadyExistsException exception = assertThrows(
+                EntityAlreadyExistsException.class,
                 () -> categoryUseCase.saveCategory(testCategory)
         );
 
