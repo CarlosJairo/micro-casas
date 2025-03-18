@@ -10,7 +10,7 @@ import com.Hogar360.casas.commons.configurations.utils.Constants;
 import com.Hogar360.casas.commons.configurations.utils.DateTimeUtil;
 import com.Hogar360.casas.domain.model.CityModel;
 import com.Hogar360.casas.domain.ports.in.CityServicePort;
-import com.Hogar360.casas.domain.utils.Pagination;
+import com.Hogar360.casas.domain.utils.pagination.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

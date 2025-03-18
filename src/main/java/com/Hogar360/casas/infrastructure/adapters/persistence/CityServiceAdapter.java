@@ -2,7 +2,7 @@ package com.Hogar360.casas.infrastructure.adapters.persistence;
 
 import com.Hogar360.casas.domain.model.CityModel;
 import com.Hogar360.casas.domain.ports.out.CityPersistencePort;
-import com.Hogar360.casas.domain.utils.Pagination;
+import com.Hogar360.casas.domain.utils.pagination.Pagination;
 import com.Hogar360.casas.infrastructure.entities.CityEntity;
 import com.Hogar360.casas.infrastructure.mappers.CityEntityMapper;
 import com.Hogar360.casas.infrastructure.repositories.mysql.CityRepository;

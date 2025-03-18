@@ -1,9 +1,7 @@
 package com.Hogar360.casas.domain.ports.in;
 
 import com.Hogar360.casas.domain.model.CityModel;
-import com.Hogar360.casas.domain.utils.Pagination;
-
-import java.util.List;
+import com.Hogar360.casas.domain.utils.pagination.Pagination;
 
 public interface CityServicePort {
     void save(CityModel cityModel);

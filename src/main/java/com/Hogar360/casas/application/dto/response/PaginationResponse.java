@@ -2,12 +2,15 @@ package com.Hogar360.casas.application.dto.response;
 
 import java.util.List;
 
+/**
+ * Clase para construir la respuesta al cliente (API).
+ */
 public class PaginationResponse<T> {
-    private final List<T> content;
-    private final long totalElements;
-    private final int totalPages;
-    private final int size;
-    private final int number;
+    private List<T> content;
+    private long totalElements;
+    private int totalPages;
+    private int size;
+    private int number;
 
     public PaginationResponse(List<T> content, long totalElements, int totalPages, int size, int number) {
         this.content = content;
@@ -17,6 +20,7 @@ public class PaginationResponse<T> {
         this.number = number;
     }
 
+    // Getters y Setters
     public List<T> getContent() {
         return content;
     }

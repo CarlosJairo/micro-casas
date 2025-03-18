@@ -6,6 +6,7 @@ import com.Hogar360.casas.domain.ports.in.CategoryServicePort;
 import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
 import com.Hogar360.casas.domain.utils.ValidationUtils;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
+import com.Hogar360.casas.domain.utils.pagination.Pagination;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class CategoryUseCase implements CategoryServicePort {
     }
 
     @Override
-    public List<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
+    public Pagination<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
         ValidationUtils.validatePaginationParams(page, size, orderAsc);
         return categoryPersistencePort.getCategories(page, size, orderAsc);
     }
