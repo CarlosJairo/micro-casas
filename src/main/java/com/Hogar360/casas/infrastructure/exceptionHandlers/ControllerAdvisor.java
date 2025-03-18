@@ -1,8 +1,6 @@
 package com.Hogar360.casas.infrastructure.exceptionHandlers;
 
-import com.Hogar360.casas.domain.exceptions.EntityAlreadyExistsException;
-import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
-import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +29,16 @@ public class ControllerAdvisor {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(IllegalArgumentException exception){
+        return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(NameEmptyException.class)
+    public ResponseEntity<ExceptionResponse> handleNameEmptyException(NameEmptyException exception){
+        return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(DescriptionEmptyException.class)
+    public ResponseEntity<ExceptionResponse> handleDescriptionEmptyException(DescriptionEmptyException exception){
         return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(), LocalDateTime.now()));
     }
 }

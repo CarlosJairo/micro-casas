@@ -2,11 +2,14 @@ package com.Hogar360.casas.infrastructure.adapters.persistence;
 
 import com.Hogar360.casas.domain.model.CategoryModel;
 import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
+import com.Hogar360.casas.domain.utils.pagination.Pagination;
+import com.Hogar360.casas.infrastructure.entities.CategoryEntity;
 import com.Hogar360.casas.infrastructure.mappers.CategoryEntityMapper;
 import com.Hogar360.casas.infrastructure.repositories.mysql.CategoryRepository;
 import com.Hogar360.casas.commons.configurations.utils.Constants;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -32,13 +35,21 @@ public class CategoryServiceAdapter implements CategoryPersistencePort {
     }
 
     @Override
-    public List<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
-        Pageable pagination;
-        if (orderAsc) {
-            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
-        } else {
-            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
-        }
-        return categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
+    public Pagination<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
+        Pageable pageable = PageRequest.of(page, size,
+                orderAsc ? Sort.by("name").ascending() : Sort.by("name").descending());
+
+        Page<CategoryEntity> pageResult = categoryRepository.findAll(pageable);
+        List<CategoryModel> models = pageResult.getContent().stream()
+                .map(categoryEntityMapper::entityToModel)
+                .toList();
+
+        return new Pagination<>(
+                models,
+                pageResult.getTotalElements(),
+                pageResult.getTotalPages(),
+                pageResult.getSize(),
+                pageResult.getNumber()
+        );
     }
 }

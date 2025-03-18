@@ -2,6 +2,7 @@ package com.Hogar360.casas.infrastructure.endpoints.rest;
 
 import com.Hogar360.casas.application.dto.request.SaveCategoryRequest;
 import com.Hogar360.casas.application.dto.response.CategoryResponse;
+import com.Hogar360.casas.application.dto.response.PaginationResponse;
 import com.Hogar360.casas.application.dto.response.SaveCategoryResponse;
 import com.Hogar360.casas.application.service.CategoryService;
 import com.Hogar360.casas.commons.configurations.utils.Constants;
@@ -40,7 +41,7 @@ public class CategoryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = SwaggerDocumentation.STATUS_200, description = SwaggerDocumentation.GET_CATEGORIES_SUCCESS)
     })
-    public ResponseEntity<List<CategoryResponse>> getCategories(
+    public ResponseEntity<PaginationResponse<CategoryResponse>> getCategories(
             @RequestParam(defaultValue = Constants.ZERO) Integer page,
             @RequestParam(defaultValue = Constants.TEN) Integer size,
             @RequestParam(defaultValue = Constants.TRUE) boolean orderAsc

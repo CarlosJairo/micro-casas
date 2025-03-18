@@ -1,6 +1,8 @@
 package com.Hogar360.casas.domain.model;
 
+import com.Hogar360.casas.domain.exceptions.DescriptionEmptyException;
 import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.NameEmptyException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 
@@ -12,6 +14,12 @@ public class CategoryModel {
     private String description;
 
     public CategoryModel(Long id, String name, String description) {
+        if (name.trim().isEmpty()) {
+            throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
+        }
+        if (description.trim().isEmpty()) {
+            throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
+        }
         if (name.length() > 50) {
             throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
         }
@@ -36,6 +44,10 @@ public class CategoryModel {
     }
 
     public void setName(String name) {
+        if (name.trim().isEmpty()) {
+            throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
+        }
+
         if (name.length() > 50) {
             throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
         }
@@ -47,6 +59,9 @@ public class CategoryModel {
     }
 
     public void setDescription(String description) {
+        if (description.trim().isEmpty()) {
+            throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
+        }
         if (description.length() > 90) {
             throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
