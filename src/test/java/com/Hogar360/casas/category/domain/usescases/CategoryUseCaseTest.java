@@ -1,72 +1,100 @@
-//package com.Hogar360.casas.category.domain.usescases;
-//
-//import com.Hogar360.casas.domain.exceptions.EntityAlreadyExistsException;
-//import com.Hogar360.casas.domain.model.CategoryModel;
-//import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
-//import com.Hogar360.casas.domain.usescases.CategoryUseCase;
-//import com.Hogar360.casas.domain.utils.constants.DomainConstants;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.junit.jupiter.MockitoExtension;
-//
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.*;
-//
-//@ExtendWith(MockitoExtension.class)
-//class CategoryUseCaseTest {
-//
-//    @Mock
-//    private CategoryPersistencePort categoryServicePort;
-//
-//    @InjectMocks
-//    private CategoryUseCase categoryUseCase;
-//
-//    private CategoryModel testCategory;
-//
-//    @BeforeEach
-//    void setUp() {
-//        testCategory = new CategoryModel(1L, "Electrodomésticos", "Categoría de electrodomésticos para el hogar");
-//    }
-//
-//    @Test
-//    void saveCategory_ShouldThrowException_WhenCategoryAlreadyExists() {
-//        when(categoryServicePort.getCategoryByName(testCategory.getName())).thenReturn(testCategory);
-//
-//        EntityAlreadyExistsException exception = assertThrows(
-//                EntityAlreadyExistsException.class,
-//                () -> categoryUseCase.saveCategory(testCategory)
-//        );
-//
-//        assertEquals(DomainConstants.CATEGORY_ALREADY_CREATED, exception.getMessage());
-//        verify(categoryServicePort, never()).saveCategory(any());
-//    }
-//
-//    @Test
-//    void saveCategory_ShouldSave_WhenCategoryDoesNotExist() {
-//        when(categoryServicePort.getCategoryByName(testCategory.getName())).thenReturn(null);
-//
-//        categoryUseCase.saveCategory(testCategory);
-//
-//        verify(categoryServicePort, times(1)).saveCategory(testCategory);
-//    }
-//
-//    @Test
-//    void getCategories_ShouldReturnList_WhenCalled() {
-//        List<CategoryModel> mockCategories = List.of(testCategory);
-//        when(categoryServicePort.getCategories(0, 10, true)).thenReturn(mockCategories);
-//
-//        List<CategoryModel> result = categoryUseCase.getCategories(0, 10, true);
-//
-//        assertEquals(1, result.size());
-//        assertEquals(1L, result.get(0).getId());
-//        assertEquals("Electrodomésticos", result.get(0).getName());
-//        assertEquals("Categoría de electrodomésticos para el hogar", result.get(0).getDescription());
-//
-//        verify(categoryServicePort, times(1)).getCategories(0, 10, true);
-//    }
-//}
+package com.Hogar360.casas.category.domain.usescases;
+
+import com.Hogar360.casas.domain.exceptions.DescriptionEmptyException;
+import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.NameEmptyException;
+import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
+import com.Hogar360.casas.domain.model.CategoryModel;
+import com.Hogar360.casas.domain.utils.constants.DomainConstants;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class CategoryModelTest {
+
+    @Test
+    void shouldCreateCategoryModelSuccessfully() {
+        CategoryModel category = new CategoryModel(1L, "Casa Moderna", "Una casa con diseño moderno");
+        assertEquals(1L, category.getId());
+        assertEquals("Casa Moderna", category.getName());
+        assertEquals("Una casa con diseño moderno", category.getDescription());
+    }
+
+    @Test
+    void shouldThrowNameEmptyExceptionWhenNameIsEmpty() {
+        NameEmptyException exception = assertThrows(NameEmptyException.class,
+                () -> new CategoryModel(1L, "   ", "Descripción válida"));
+        assertEquals(DomainConstants.FIELD_NAME_EMPTY_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowDescriptionEmptyExceptionWhenDescriptionIsEmpty() {
+        DescriptionEmptyException exception = assertThrows(DescriptionEmptyException.class,
+                () -> new CategoryModel(1L, "Nombre válido", "   "));
+        assertEquals(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowNameMaxSizeExceededExceptionWhenNameIsTooLong() {
+        String longName = "a".repeat(51);
+        NameMaxSizeExceededException exception = assertThrows(NameMaxSizeExceededException.class,
+                () -> new CategoryModel(1L, longName, "Descripción válida"));
+        assertEquals(DomainConstants.NAME_MAX_SIZE_EXCEEDED, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowDescriptionMaxSizeExceededExceptionWhenDescriptionIsTooLong() {
+        String longDescription = "b".repeat(91);
+        DescriptionMaxSizeExceededException exception = assertThrows(DescriptionMaxSizeExceededException.class,
+                () -> new CategoryModel(1L, "Nombre válido", longDescription));
+        assertEquals(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowNameEmptyExceptionOnSetNameWithEmptyString() {
+        CategoryModel category = new CategoryModel(1L, "Nombre válido", "Descripción válida");
+        NameEmptyException exception = assertThrows(NameEmptyException.class,
+                () -> category.setName("   "));
+        assertEquals(DomainConstants.FIELD_NAME_EMPTY_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowNameMaxSizeExceededExceptionOnSetNameTooLong() {
+        CategoryModel category = new CategoryModel(1L, "Nombre válido", "Descripción válida");
+        String longName = "a".repeat(51);
+        NameMaxSizeExceededException exception = assertThrows(NameMaxSizeExceededException.class,
+                () -> category.setName(longName));
+        assertEquals(DomainConstants.NAME_MAX_SIZE_EXCEEDED, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowDescriptionEmptyExceptionOnSetDescriptionWithEmptyString() {
+        CategoryModel category = new CategoryModel(1L, "Nombre válido", "Descripción válida");
+        DescriptionEmptyException exception = assertThrows(DescriptionEmptyException.class,
+                () -> category.setDescription("   "));
+        assertEquals(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void shouldThrowDescriptionMaxSizeExceededExceptionOnSetDescriptionTooLong() {
+        CategoryModel category = new CategoryModel(1L, "Nombre válido", "Descripción válida");
+        String longDescription = "b".repeat(91);
+        DescriptionMaxSizeExceededException exception = assertThrows(DescriptionMaxSizeExceededException.class,
+                () -> category.setDescription(longDescription));
+        assertEquals(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED, exception.getMessage());
+    }
+
+    @Test
+    void shouldSetNameSuccessfully() {
+        CategoryModel category = new CategoryModel(1L, "Nombre válido", "Descripción válida");
+        category.setName("Nuevo Nombre");
+        assertEquals("Nuevo Nombre", category.getName());
+    }
+
+    @Test
+    void shouldSetDescriptionSuccessfully() {
+        CategoryModel category = new CategoryModel(1L, "Nombre válido", "Descripción válida");
+        category.setDescription("Nueva descripción");
+        assertEquals("Nueva descripción", category.getDescription());
+    }
+}
