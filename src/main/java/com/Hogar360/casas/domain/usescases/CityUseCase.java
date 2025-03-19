@@ -16,12 +16,6 @@ public class CityUseCase implements CityServicePort {
 
     @Override
     public CityModel  save(CityModel cityModel) {
-        CityModel city = cityPersistencePort.getCityByName(cityModel.getName());
-
-        if (city != null) {
-            throw new EntityAlreadyExistsException(DomainConstants.CITY_NAME_ENTITY);
-        }
-
         return  cityPersistencePort.save(cityModel);
     }
 

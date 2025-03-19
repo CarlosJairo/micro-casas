@@ -32,11 +32,6 @@ public class CityServiceAdapter implements CityPersistencePort {
     }
 
     @Override
-    public CityModel getCityByName(String cityName) {
-        return cityEntityMapper.entityToModel(cityRepository.findByName(cityName).orElse(null));
-    }
-
-    @Override
     public Pagination<CityModel> searchCities(String query, int page, int size, String sortBy, String order) {
         Sort sort = Sort.by(Sort.Direction.fromString(order), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
