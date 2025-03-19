@@ -24,8 +24,11 @@ public class CityServiceAdapter implements CityPersistencePort {
     private final CityEntityMapper cityEntityMapper;
 
     @Override
-    public void save(CityModel cityModel) {
-        cityRepository.save(cityEntityMapper.modelToEntity(cityModel));
+    public CityModel  save(CityModel cityModel) {
+        CityEntity cityEntity = cityEntityMapper.modelToEntity(cityModel);
+        CityEntity savedEntity = cityRepository.save(cityEntity);
+
+        return cityEntityMapper.entityToModel(savedEntity);
     }
 
     @Override

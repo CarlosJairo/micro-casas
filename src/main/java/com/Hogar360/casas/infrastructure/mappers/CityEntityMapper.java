@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring", uses = DepartmentEntityMapper.class)
+@Mapper(componentModel = "spring")
 public interface CityEntityMapper {
 
     @Mapping(target = "department", source = "departmentId", qualifiedByName = "mapDepartmentFromId")

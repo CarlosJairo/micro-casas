@@ -10,6 +10,7 @@ import com.Hogar360.casas.commons.configurations.utils.Constants;
 import com.Hogar360.casas.commons.configurations.utils.DateTimeUtil;
 import com.Hogar360.casas.domain.model.CityModel;
 import com.Hogar360.casas.domain.ports.in.CityServicePort;
+import com.Hogar360.casas.domain.ports.in.LocationServicePort;
 import com.Hogar360.casas.domain.utils.pagination.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -22,10 +23,15 @@ import java.util.List;
 public class CityServiceImpl implements CityService {
     private final CityServicePort cityServicePort;
     private final CityDtoMapper cityDtoMapper;
+    private final LocationServicePort locationServicePort;
 
     @Override
     public SaveCityResponse save(SaveCityRequest saveCityRequest) {
-        cityServicePort.save(cityDtoMapper.requestToModel(saveCityRequest));
+        CityModel cityModel = cityDtoMapper.requestToModel(saveCityRequest);
+
+        CityModel city = cityServicePort.save(cityModel);
+
+        locationServicePort.save(city.getId(), saveCityRequest.departmentId());
 
         return new SaveCityResponse(
                 Constants.SAVE_CITY_RESPONSE_MESSAGE, DateTimeUtil.getCurrentTimestamp());
@@ -33,7 +39,6 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public PaginationResponse<CityResponse> searchCities(String query, Pageable pageable) {
-        // Llamamos al dominio para hacer la búsqueda
         Pagination<CityModel> cityPage = cityServicePort.searchCities(
                 query,
                 pageable.getPageNumber(),
@@ -42,13 +47,11 @@ public class CityServiceImpl implements CityService {
                 pageable.getSort().toList().get(0).getDirection().name()
         );
 
-        // Convertimos `CityModel` a `CityResponse`
         List<CityResponse> cityResponses = cityPage.getContent()
                 .stream()
                 .map(cityDtoMapper::modelToResponse)
                 .toList();
 
-        // Retornamos la paginación con los datos convertidos
         return new PaginationResponse<>(
                 cityResponses,
                 cityPage.getTotalElements(),

@@ -4,12 +4,15 @@ import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 
+import java.util.List;
+
 public class DepartmentModel {
     private Long id;
     private String name;
     private String description;
+    private List<CityModel> cities;  // ✅ Relación agregada
 
-    public DepartmentModel(Long id, String name, String description) {
+    public DepartmentModel(Long id, String name, String description, List<CityModel> cities) {
         if (name.length() > 50 ) {
             throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
         }
@@ -20,6 +23,8 @@ public class DepartmentModel {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.cities = cities;
+
     }
 
     public Long getId() {
@@ -50,5 +55,13 @@ public class DepartmentModel {
             throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
         this.description = description;
+    }
+
+    public List<CityModel> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<CityModel> cities) {
+        this.cities = cities;
     }
 }

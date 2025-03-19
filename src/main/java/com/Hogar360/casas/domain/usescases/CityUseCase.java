@@ -15,14 +15,14 @@ public class CityUseCase implements CityServicePort {
     }
 
     @Override
-    public void save(CityModel cityModel) {
+    public CityModel  save(CityModel cityModel) {
         CityModel city = cityPersistencePort.getCityByName(cityModel.getName());
 
         if (city != null) {
             throw new EntityAlreadyExistsException(DomainConstants.CITY_NAME_ENTITY);
         }
 
-        cityPersistencePort.save(cityModel);
+        return  cityPersistencePort.save(cityModel);
     }
 
     @Override
