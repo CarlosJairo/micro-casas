@@ -1,8 +1,5 @@
 package com.Hogar360.casas.infrastructure.adapters.persistence;
 
-import com.Hogar360.casas.application.dto.response.LocationResponse;
-import com.Hogar360.casas.application.dto.response.PaginationResponse;
-import com.Hogar360.casas.domain.model.LocationModel;
 import com.Hogar360.casas.domain.model.LocationQueryModel;
 import com.Hogar360.casas.domain.ports.out.LocationPersistencePort;
 import com.Hogar360.casas.domain.utils.pagination.Pagination;
