@@ -1,8 +1,11 @@
 package com.Hogar360.casas.domain.model;
 
+import com.Hogar360.casas.domain.exceptions.DescriptionEmptyException;
 import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.NameEmptyException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
 import com.Hogar360.casas.domain.utils.constants.DepartmentDomainConstants;
+import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 
 import java.util.List;
 
@@ -13,6 +16,12 @@ public class DepartmentModel {
     private List<CityModel> cities;  // ✅ Relación agregada
 
     public DepartmentModel(Long id, String name, String description, List<CityModel> cities) {
+        if (name.trim().isEmpty()) {
+            throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
+        }
+        if (description.trim().isEmpty()) {
+            throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
+        }
         if (name.length() > DepartmentDomainConstants.DEPARTMENT_NAME_MAX_LENGTH ) {
             throw new NameMaxSizeExceededException(
                     DepartmentDomainConstants.DEPARTMENT_NAME_MAX_SIZE_EXCEEDED);
@@ -42,6 +51,9 @@ public class DepartmentModel {
     }
 
     public void setName(String name) {
+        if (name.trim().isEmpty()) {
+            throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
+        }
         if (name.length() > DepartmentDomainConstants.DEPARTMENT_NAME_MAX_LENGTH ) {
             throw new NameMaxSizeExceededException(
                     DepartmentDomainConstants.DEPARTMENT_NAME_MAX_SIZE_EXCEEDED);
@@ -54,6 +66,9 @@ public class DepartmentModel {
     }
 
     public void setDescription(String description) {
+        if (description.trim().isEmpty()) {
+            throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
+        }
         if (description.length() > DepartmentDomainConstants.DEPARTMENT_DESCRIPTION_MAX_LENGTH) {
             throw new DescriptionMaxSizeExceededException(
                     DepartmentDomainConstants.DEPARTMENT_DESCRIPTION_MAX_SIZE_EXCEEDED);
