@@ -10,6 +10,4 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CityDtoMapper {
     CityModel requestToModel(SaveCityRequest saveCityRequest);
-    @Mapping(target = "department", source = "departmentId") // 🔹 Convertir ID del departamento en nombre
-    CityResponse modelToResponse(CityModel cityModel);
 }

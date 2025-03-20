@@ -5,10 +5,8 @@ import com.Hogar360.casas.domain.model.CategoryModel;
 import com.Hogar360.casas.domain.ports.in.CategoryServicePort;
 import com.Hogar360.casas.domain.ports.out.CategoryPersistencePort;
 import com.Hogar360.casas.domain.utils.ValidationUtils;
-import com.Hogar360.casas.domain.utils.constants.DomainConstants;
+import com.Hogar360.casas.domain.utils.constants.CategoryDomainConstants;
 import com.Hogar360.casas.domain.utils.pagination.Pagination;
-
-import java.util.List;
 
 public class CategoryUseCase implements CategoryServicePort {
     private final CategoryPersistencePort categoryPersistencePort;
@@ -22,7 +20,7 @@ public class CategoryUseCase implements CategoryServicePort {
         CategoryModel category = categoryPersistencePort.getCategoryByName(categoryModel.getName());
 
         if (category != null) {
-            throw new EntityAlreadyExistsException(DomainConstants.CATEGORY_NAME_ENTITY);
+            throw new EntityAlreadyExistsException(CategoryDomainConstants.CATEGORY_NAME_ENTITY);
         }
 
         categoryPersistencePort.saveCategory(categoryModel);

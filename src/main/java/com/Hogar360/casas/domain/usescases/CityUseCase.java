@@ -1,32 +1,30 @@
 package com.Hogar360.casas.domain.usescases;
 
-import com.Hogar360.casas.domain.exceptions.EntityAlreadyExistsException;
+import com.Hogar360.casas.domain.exceptions.DepartmentNotExistException;
 import com.Hogar360.casas.domain.model.CityModel;
+import com.Hogar360.casas.domain.model.DepartmentModel;
 import com.Hogar360.casas.domain.ports.in.CityServicePort;
 import com.Hogar360.casas.domain.ports.out.CityPersistencePort;
-import com.Hogar360.casas.domain.utils.pagination.Pagination;
-import com.Hogar360.casas.domain.utils.constants.DomainConstants;
+import com.Hogar360.casas.domain.ports.out.DepartmentPersistencePort;
+import com.Hogar360.casas.domain.utils.constants.CityDomainConstants;
 
 public class CityUseCase implements CityServicePort {
     private final CityPersistencePort cityPersistencePort;
+    private final DepartmentPersistencePort departmentPersistencePort;
 
-    public CityUseCase(CityPersistencePort cityPersistencePort) {
+    public CityUseCase(CityPersistencePort cityPersistencePort, DepartmentPersistencePort departmentPersistencePort) {
         this.cityPersistencePort = cityPersistencePort;
+        this.departmentPersistencePort = departmentPersistencePort;
     }
 
     @Override
-    public void save(CityModel cityModel) {
-        CityModel city = cityPersistencePort.getCityByName(cityModel.getName());
+    public CityModel save(CityModel cityModel) {
+        DepartmentModel department = departmentPersistencePort.getDepartmentById(cityModel.getDepartmentId());
 
-        if (city != null) {
-            throw new EntityAlreadyExistsException(DomainConstants.CITY_NAME_ENTITY);
+        if (department == null) {
+            throw new DepartmentNotExistException(CityDomainConstants.DEPARTMENT_NOT_FOUND);
         }
 
-        cityPersistencePort.save(cityModel);
-    }
-
-    @Override
-    public Pagination<CityModel> searchCities(String query, int page, int size, String sortBy, String order) {
-        return cityPersistencePort.searchCities(query, page, size, sortBy, order);
+        return cityPersistencePort.save(cityModel);
     }
 }

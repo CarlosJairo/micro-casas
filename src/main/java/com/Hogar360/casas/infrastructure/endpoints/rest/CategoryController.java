@@ -7,6 +7,7 @@ import com.Hogar360.casas.application.dto.response.SaveCategoryResponse;
 import com.Hogar360.casas.application.service.CategoryService;
 import com.Hogar360.casas.commons.configurations.utils.Constants;
 import com.Hogar360.casas.commons.configurations.utils.SwaggerDocumentation;
+import com.Hogar360.casas.infrastructure.utils.constants.EndpointPaths;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,10 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/category")
+@RequestMapping(EndpointPaths.CATEGORY_BASE)
 @RequiredArgsConstructor
 @Tag(name = SwaggerDocumentation.CATEGORY_TAG, description = SwaggerDocumentation.CATEGORY_DESCRIPTION)
 public class CategoryController {
@@ -42,9 +41,9 @@ public class CategoryController {
             @ApiResponse(responseCode = SwaggerDocumentation.STATUS_200, description = SwaggerDocumentation.GET_CATEGORIES_SUCCESS)
     })
     public ResponseEntity<PaginationResponse<CategoryResponse>> getCategories(
-            @RequestParam(defaultValue = Constants.ZERO) Integer page,
-            @RequestParam(defaultValue = Constants.TEN) Integer size,
-            @RequestParam(defaultValue = Constants.TRUE) boolean orderAsc
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_PAGE) Integer page,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_SIZE) Integer size,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_ORDER_ASC) boolean orderAsc
     ) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
     }

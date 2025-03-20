@@ -4,7 +4,7 @@ import com.Hogar360.casas.domain.exceptions.EntityAlreadyExistsException;
 import com.Hogar360.casas.domain.model.DepartmentModel;
 import com.Hogar360.casas.domain.ports.in.DepartmentServicePort;
 import com.Hogar360.casas.domain.ports.out.DepartmentPersistencePort;
-import com.Hogar360.casas.domain.utils.constants.DomainConstants;
+import com.Hogar360.casas.domain.utils.constants.DepartmentDomainConstants;
 
 public class DepartmentUseCase implements DepartmentServicePort {
     private final DepartmentPersistencePort departmentPersistencePort;
@@ -18,7 +18,7 @@ public class DepartmentUseCase implements DepartmentServicePort {
         DepartmentModel department = departmentPersistencePort.getDepartmentByName(departmentModel.getName());
 
         if (department != null) {
-            throw new EntityAlreadyExistsException(DomainConstants.DEPARTMENT_NAME_ENTITY);
+            throw new EntityAlreadyExistsException(DepartmentDomainConstants.DEPARTMENT_NAME_ENTITY);
         }
 
         departmentPersistencePort.save(departmentModel);

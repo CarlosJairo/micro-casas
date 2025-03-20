@@ -8,11 +8,11 @@ public final class Constants {
     public static final String SAVE_CATEGORY_RESPONSE_MESSAGE = "Category created successfully.";
     public static final String SAVE_CITY_RESPONSE_MESSAGE = "City created successfully.";
     public static final String SAVE_DEPARTMENT_RESPONSE_MESSAGE = "Department created successfully.";
-    public static final String PAGEABLE_FIELD_NAME = "name";
-    public static final String ZERO = "0";
-    public static final String TEN = "10";
-    public static final String TRUE = "true";
 
-    // public static final String NAME_MAX_SIZE_EXCEEDED = "The category name cannot exceed 50 characters.";
-    // public static final String DESCRIPTION_MAX_SIZE_EXCEEDED = "The category description cannot exceed 90 characters.";
+    public static final String PAGEABLE_FIELD_NAME = "name";
+
+    public static final String DEFAULT_PAGEABLE_QUERY = "";
+    public static final String DEFAULT_PAGEABLE_PAGE = "0";
+    public static final String DEFAULT_PAGEABLE_SIZE = "10";
+    public static final String DEFAULT_PAGEABLE_ORDER_ASC = "true";
 }

@@ -1,7 +1,10 @@
 package com.Hogar360.casas.domain.model;
 
+import com.Hogar360.casas.domain.exceptions.DescriptionEmptyException;
 import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.Hogar360.casas.domain.exceptions.NameEmptyException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
+import com.Hogar360.casas.domain.utils.constants.CityDomainConstants;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 
 public class CityModel {
@@ -11,11 +14,17 @@ public class CityModel {
     private final Long departmentId;
 
     public CityModel(Long id, String name, String description, Long departmentId) {
-        if (name.length() > 50 ) {
-            throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
+        if (name.trim().isEmpty()) {
+            throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
         }
-        if (description.length() > 90) {
-            throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
+        if (description.trim().isEmpty()) {
+            throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
+        }
+        if (name.length() > CityDomainConstants.CITY_NAME_MAX_LENGTH ) {
+            throw new NameMaxSizeExceededException(CityDomainConstants.CITY_NAME_MAX_SIZE_EXCEEDED);
+        }
+        if (description.length() > CityDomainConstants.CITY_DESCRIPTION_MAX_LENGTH) {
+            throw new DescriptionMaxSizeExceededException(CityDomainConstants.CITY_DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
 
         this.id = id;
@@ -37,8 +46,11 @@ public class CityModel {
     }
 
     public void setName(String name) {
-        if (name.length() > 50 ) {
-            throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
+        if (name.trim().isEmpty()) {
+            throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
+        }
+        if (name.length() > CityDomainConstants.CITY_NAME_MAX_LENGTH ) {
+            throw new NameMaxSizeExceededException(CityDomainConstants.CITY_NAME_MAX_SIZE_EXCEEDED);
         }
         this.name = name;
     }
@@ -48,8 +60,11 @@ public class CityModel {
     }
 
     public void setDescription(String description) {
-        if (description.length() > 120) {
-            throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
+        if (description.trim().isEmpty()) {
+            throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
+        }
+        if (description.length() > CityDomainConstants.CITY_DESCRIPTION_MAX_LENGTH) {
+            throw new DescriptionMaxSizeExceededException(CityDomainConstants.CITY_DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
         this.description = description;
     }

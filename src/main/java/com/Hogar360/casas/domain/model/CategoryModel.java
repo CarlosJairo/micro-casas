@@ -4,6 +4,7 @@ import com.Hogar360.casas.domain.exceptions.DescriptionEmptyException;
 import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.Hogar360.casas.domain.exceptions.NameEmptyException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
+import com.Hogar360.casas.domain.utils.constants.CategoryDomainConstants;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 
 import java.util.Objects;
@@ -20,11 +21,11 @@ public class CategoryModel {
         if (description.trim().isEmpty()) {
             throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
         }
-        if (name.length() > 50) {
-            throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
+        if (name.length() > CategoryDomainConstants.CATEGORY_NAME_MAX_LENGTH) {
+            throw new NameMaxSizeExceededException(CategoryDomainConstants.CATEGORY_NAME_MAX_SIZE_EXCEEDED);
         }
-        if (description.length() > 90) {
-            throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
+        if (description.length() > CategoryDomainConstants.CATEGORY_DESCRIPTION_MAX_LENGTH) {
+            throw new DescriptionMaxSizeExceededException(CategoryDomainConstants.CATEGORY_DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
         this.id = id;
         this.name = name;
@@ -48,8 +49,8 @@ public class CategoryModel {
             throw new NameEmptyException(DomainConstants.FIELD_NAME_EMPTY_MESSAGE);
         }
 
-        if (name.length() > 50) {
-            throw new NameMaxSizeExceededException(DomainConstants.NAME_MAX_SIZE_EXCEEDED);
+        if (name.length() > CategoryDomainConstants.CATEGORY_NAME_MAX_LENGTH) {
+            throw new NameMaxSizeExceededException(CategoryDomainConstants.CATEGORY_NAME_MAX_SIZE_EXCEEDED);
         }
         this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
     }
@@ -62,8 +63,8 @@ public class CategoryModel {
         if (description.trim().isEmpty()) {
             throw new DescriptionEmptyException(DomainConstants.FIELD_DESCRIPTION_EMPTY_MESSAGE);
         }
-        if (description.length() > 90) {
-            throw new DescriptionMaxSizeExceededException(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED);
+        if (description.length() > CategoryDomainConstants.CATEGORY_DESCRIPTION_MAX_LENGTH) {
+            throw new DescriptionMaxSizeExceededException(CategoryDomainConstants.CATEGORY_DESCRIPTION_MAX_SIZE_EXCEEDED);
         }
 
         this.description = Objects.requireNonNull(description, DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
