@@ -62,7 +62,7 @@ public class BeanConfiguration {
 
     @Bean
     public CityServicePort cityServicePort() {
-        return new CityUseCase(cityPersistencePort());
+        return new CityUseCase(cityPersistencePort(), departmentPersistencePort());
     }
 
     @Bean

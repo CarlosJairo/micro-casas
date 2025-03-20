@@ -9,4 +9,6 @@ public class CityDomainConstants {
     public static final String CITY_NAME_ENTITY = "City";
     public static final String CITY_NAME_MAX_SIZE_EXCEEDED = "The city name cannot exceed 50 characters.";
     public static final String CITY_DESCRIPTION_MAX_SIZE_EXCEEDED = "The city description cannot exceed 120 characters.";
+    public static final String DEPARTMENT_NOT_FOUND = "No department was found with that ID.";
+
 }

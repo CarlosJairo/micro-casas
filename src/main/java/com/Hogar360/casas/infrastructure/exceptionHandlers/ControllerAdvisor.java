@@ -2,6 +2,7 @@ package com.Hogar360.casas.infrastructure.exceptionHandlers;
 
 import com.Hogar360.casas.domain.exceptions.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -40,5 +41,16 @@ public class ControllerAdvisor {
     @ExceptionHandler(DescriptionEmptyException.class)
     public ResponseEntity<ExceptionResponse> handleDescriptionEmptyException(DescriptionEmptyException exception){
         return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(DepartmentNotExistException.class)
+    public ResponseEntity<ExceptionResponse> handleDepartmentNotExistException(DepartmentNotExistException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidFormat(HttpMessageNotReadableException ex) {
+        String message = ExceptionConstants.DEPARTMENT_ID_MUST_BE_NUMBER;
+        return ResponseEntity.badRequest().body(new ExceptionResponse(message, LocalDateTime.now()));
     }
 }

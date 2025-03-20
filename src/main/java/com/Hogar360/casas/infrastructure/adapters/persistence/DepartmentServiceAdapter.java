@@ -21,6 +21,11 @@ public class DepartmentServiceAdapter implements DepartmentPersistencePort {
     }
 
     @Override
+    public DepartmentModel getDepartmentById(Long id) {
+        return departmentEntityMapper.entityToModel(departmentRepository.findById(id).orElse(null));
+    }
+
+    @Override
     public DepartmentModel getDepartmentByName(String departmentName) {
         return departmentEntityMapper.entityToModel(departmentRepository.findByName(departmentName).orElse(null));
     }
