@@ -37,7 +37,9 @@ public class CategoryServiceAdapter implements CategoryPersistencePort {
     @Override
     public Pagination<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
         Pageable pageable = PageRequest.of(page, size,
-                orderAsc ? Sort.by("name").ascending() : Sort.by("name").descending());
+                orderAsc ?
+                        Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending() :
+                        Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
 
         Page<CategoryEntity> pageResult = categoryRepository.findAll(pageable);
         List<CategoryModel> models = pageResult.getContent().stream()

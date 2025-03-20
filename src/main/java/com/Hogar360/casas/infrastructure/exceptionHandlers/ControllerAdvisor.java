@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 public class ControllerAdvisor {
     @ExceptionHandler(NameMaxSizeExceededException.class)
     public ResponseEntity<ExceptionResponse> handleNameMaxSizeExceededException(NameMaxSizeExceededException exception) {
-        return ResponseEntity.badRequest().body(new ExceptionResponse(ExceptionConstants.NAME_MAX_SIZE_MESSAGE,
+        return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(),
                 LocalDateTime.now()));
     }
 
     @ExceptionHandler(DescriptionMaxSizeExceededException.class)
     public ResponseEntity<ExceptionResponse> handleDescriptionMaxSizeExceededException(DescriptionMaxSizeExceededException exception) {
-        return ResponseEntity.badRequest().body(new ExceptionResponse(ExceptionConstants.DESCRIPTION_MAX_SIZE_MESSAGE,
+        return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(),
                 LocalDateTime.now()));
     }
 
     @ExceptionHandler(EntityAlreadyExistsException.class)
     public ResponseEntity<ExceptionResponse> handleCategoryAlreadyExistsException(EntityAlreadyExistsException exception) {
-        return ResponseEntity.badRequest().body(new ExceptionResponse(ExceptionConstants.CATEGORY_EXISTS_EXCEPTION,
+        return ResponseEntity.badRequest().body(new ExceptionResponse(exception.getMessage(),
                 LocalDateTime.now()));
     }
 
