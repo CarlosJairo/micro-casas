@@ -17,8 +17,8 @@ public class LocationServiceImpl implements LocationService {
     private final LocationDtoMapper locationDtoMapper;
 
     @Override
-    public PaginationResponse<LocationResponse> getLocations(String query, Integer page, Integer size, boolean orderAsc) {
-        Pagination<LocationQueryModel> paginationModel =  locationServicePort.getLocations(query, page, size, orderAsc);
+    public PaginationResponse<LocationResponse> getLocations(String query, Long departmentId,  Integer page, Integer size, boolean orderAsc) {
+        Pagination<LocationQueryModel> paginationModel =  locationServicePort.getLocations(query, departmentId, page, size, orderAsc);
 
         return new PaginationResponse<>(
                 locationDtoMapper.modelListToResponseList(paginationModel.getContent()), // Ahora acepta LocationQueryModel

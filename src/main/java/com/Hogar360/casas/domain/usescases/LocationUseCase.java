@@ -21,8 +21,8 @@ public class LocationUseCase implements LocationServicePort {
     }
 
     @Override
-    public Pagination<LocationQueryModel> getLocations(String query, Integer page, Integer size, boolean orderAsc) {
+    public Pagination<LocationQueryModel> getLocations(String query, Long departmentId, Integer page, Integer size, boolean orderAsc) {
         ValidationUtils.validatePaginationParams(page, size, orderAsc);
-        return locationPersistencePort.getLocations(query, page, size, orderAsc);
+        return locationPersistencePort.getLocations(query, departmentId, page, size, orderAsc);
     }
 }

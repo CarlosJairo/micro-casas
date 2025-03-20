@@ -36,10 +36,11 @@ public class LocationController {
     @GetMapping
     public ResponseEntity<PaginationResponse<LocationResponse>> getLocations(
             @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_QUERY) String query,
+            @RequestParam(required = false) Long departmentId,
             @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_PAGE) Integer page,
             @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_SIZE) Integer size,
             @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_ORDER_ASC) boolean orderAsc
     ) {
-        return ResponseEntity.ok(locationService.getLocations(query, page, size, orderAsc));
+        return ResponseEntity.ok(locationService.getLocations(query, departmentId, page, size, orderAsc));
     }
 }

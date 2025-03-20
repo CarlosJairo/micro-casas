@@ -43,11 +43,11 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     }
 
     @Override
-    public Pagination<LocationQueryModel> getLocations(String query, Integer page, Integer size, boolean orderAsc) {
+    public Pagination<LocationQueryModel> getLocations(String query, Long departmentId, Integer page, Integer size, boolean orderAsc) {
         Sort sort = orderAsc ? Sort.by("city.name").ascending() : Sort.by("city.name").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<LocationEntity> locationPage = locationRepository.searchByCityOrDepartment(query, pageable);
+        Page<LocationEntity> locationPage = locationRepository.searchByCityOrDepartment(query, departmentId, pageable);
 
         List<LocationQueryModel> locationModels = locationPage.getContent().stream()
                 .map(locationEntity -> new LocationQueryModel(
