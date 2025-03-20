@@ -5,6 +5,7 @@ import com.Hogar360.casas.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.Hogar360.casas.domain.exceptions.NameEmptyException;
 import com.Hogar360.casas.domain.exceptions.NameMaxSizeExceededException;
 import com.Hogar360.casas.domain.model.CategoryModel;
+import com.Hogar360.casas.domain.utils.constants.CategoryDomainConstants;
 import com.Hogar360.casas.domain.utils.constants.DomainConstants;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +40,7 @@ class CategoryModelTest {
         String longName = "a".repeat(51);
         NameMaxSizeExceededException exception = assertThrows(NameMaxSizeExceededException.class,
                 () -> new CategoryModel(1L, longName, "Descripción válida"));
-        assertEquals(DomainConstants.NAME_MAX_SIZE_EXCEEDED, exception.getMessage());
+        assertEquals(CategoryDomainConstants.CATEGORY_NAME_MAX_SIZE_EXCEEDED, exception.getMessage());
     }
 
     @Test
@@ -47,7 +48,7 @@ class CategoryModelTest {
         String longDescription = "b".repeat(91);
         DescriptionMaxSizeExceededException exception = assertThrows(DescriptionMaxSizeExceededException.class,
                 () -> new CategoryModel(1L, "Nombre válido", longDescription));
-        assertEquals(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED, exception.getMessage());
+        assertEquals(CategoryDomainConstants.CATEGORY_DESCRIPTION_MAX_SIZE_EXCEEDED, exception.getMessage());
     }
 
     @Test

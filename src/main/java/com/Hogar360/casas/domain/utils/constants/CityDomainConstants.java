@@ -1,6 +1,9 @@
 package com.Hogar360.casas.domain.utils.constants;
 
 public class CityDomainConstants {
+    public  CityDomainConstants () {
+        throw new IllegalStateException("Utility class");
+    }
     public static final int CITY_NAME_MAX_LENGTH = 50;
     public static final int CITY_DESCRIPTION_MAX_LENGTH = 90;
     public static final String CITY_NAME_ENTITY = "City";

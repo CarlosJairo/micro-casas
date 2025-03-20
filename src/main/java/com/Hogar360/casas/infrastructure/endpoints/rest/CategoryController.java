@@ -7,6 +7,7 @@ import com.Hogar360.casas.application.dto.response.SaveCategoryResponse;
 import com.Hogar360.casas.application.service.CategoryService;
 import com.Hogar360.casas.commons.configurations.utils.Constants;
 import com.Hogar360.casas.commons.configurations.utils.SwaggerDocumentation;
+import com.Hogar360.casas.infrastructure.utils.constants.EndpointPaths;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping(EndpointPaths.CATEGORY_BASE)
 @RequiredArgsConstructor
 @Tag(name = SwaggerDocumentation.CATEGORY_TAG, description = SwaggerDocumentation.CATEGORY_DESCRIPTION)
 public class CategoryController {
