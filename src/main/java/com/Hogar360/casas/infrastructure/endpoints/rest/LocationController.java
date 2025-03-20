@@ -1,6 +1,5 @@
 package com.Hogar360.casas.infrastructure.endpoints.rest;
 
-import com.Hogar360.casas.application.dto.response.CategoryResponse;
 import com.Hogar360.casas.application.dto.response.LocationResponse;
 import com.Hogar360.casas.application.dto.response.PaginationResponse;
 import com.Hogar360.casas.application.service.LocationService;
@@ -20,10 +19,10 @@ public class LocationController {
 
     @GetMapping
     public ResponseEntity<PaginationResponse<LocationResponse>> getLocations(
-            @RequestParam(defaultValue = "") String query,
-            @RequestParam(defaultValue = Constants.ZERO) Integer page,
-            @RequestParam(defaultValue = Constants.TEN) Integer size,
-            @RequestParam(defaultValue = Constants.TRUE) boolean orderAsc
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_QUERY) String query,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_PAGE) Integer page,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_SIZE) Integer size,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_ORDER_ASC) boolean orderAsc
     ) {
         return ResponseEntity.ok(locationService.getLocations(query, page, size, orderAsc));
     }

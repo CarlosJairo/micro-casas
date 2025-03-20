@@ -16,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/category")
 @RequiredArgsConstructor
@@ -42,9 +40,9 @@ public class CategoryController {
             @ApiResponse(responseCode = SwaggerDocumentation.STATUS_200, description = SwaggerDocumentation.GET_CATEGORIES_SUCCESS)
     })
     public ResponseEntity<PaginationResponse<CategoryResponse>> getCategories(
-            @RequestParam(defaultValue = Constants.ZERO) Integer page,
-            @RequestParam(defaultValue = Constants.TEN) Integer size,
-            @RequestParam(defaultValue = Constants.TRUE) boolean orderAsc
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_PAGE) Integer page,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_SIZE) Integer size,
+            @RequestParam(defaultValue = Constants.DEFAULT_PAGEABLE_ORDER_ASC) boolean orderAsc
     ) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
     }
