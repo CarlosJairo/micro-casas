@@ -11,10 +11,4 @@ import java.util.Optional;
 
 public interface CityRepository extends JpaRepository<CityEntity, Long> {
     Optional<CityEntity> findByName(String cityName);
-    @Query("""
-        SELECT c FROM CityEntity c
-        WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :query, '%'))
-           OR LOWER(c.department.name) LIKE LOWER(CONCAT('%', :query, '%'))
-    """)
-    Page<CityEntity> searchCities(@Param("query") String query, Pageable pageable);
 }

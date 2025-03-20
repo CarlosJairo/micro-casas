@@ -8,5 +8,4 @@ import org.springframework.data.domain.Pageable;
 
 public interface CityService {
     SaveCityResponse save(SaveCityRequest saveCityRequest);
-    PaginationResponse<CityResponse> searchCities(String query, Pageable pageable);
 }
