@@ -4,6 +4,7 @@ import com.Hogar360.casas.domain.model.LocationModel;
 import com.Hogar360.casas.domain.model.LocationQueryModel;
 import com.Hogar360.casas.domain.ports.in.LocationServicePort;
 import com.Hogar360.casas.domain.ports.out.LocationPersistencePort;
+import com.Hogar360.casas.domain.utils.ValidationUtils;
 import com.Hogar360.casas.domain.utils.pagination.Pagination;
 
 
@@ -21,6 +22,7 @@ public class LocationUseCase implements LocationServicePort {
 
     @Override
     public Pagination<LocationQueryModel> getLocations(String query, Integer page, Integer size, boolean orderAsc) {
+        ValidationUtils.validatePaginationParams(page, size, orderAsc);
         return locationPersistencePort.getLocations(query, page, size, orderAsc);
     }
 }
