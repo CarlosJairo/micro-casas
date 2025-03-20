@@ -11,6 +11,9 @@ public class LocationModel {
         this.departmentId = departmentId;
     }
 
+    public LocationModel(Long id, String name, Long id1, String name1) {
+    }
+
     public Long getId() {
         return id;
     }
