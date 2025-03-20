@@ -13,7 +13,7 @@ public class DepartmentModel {
     private Long id;
     private String name;
     private String description;
-    private List<CityModel> cities;  // ✅ Relación agregada
+    private List<CityModel> cities;
 
     public DepartmentModel(Long id, String name, String description, List<CityModel> cities) {
         if (name.trim().isEmpty()) {

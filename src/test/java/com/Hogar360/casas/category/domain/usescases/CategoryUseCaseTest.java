@@ -65,7 +65,7 @@ class CategoryModelTest {
         String longName = "a".repeat(51);
         NameMaxSizeExceededException exception = assertThrows(NameMaxSizeExceededException.class,
                 () -> category.setName(longName));
-        assertEquals(DomainConstants.NAME_MAX_SIZE_EXCEEDED, exception.getMessage());
+        assertEquals(CategoryDomainConstants.CATEGORY_NAME_MAX_SIZE_EXCEEDED, exception.getMessage());
     }
 
     @Test
@@ -82,7 +82,7 @@ class CategoryModelTest {
         String longDescription = "b".repeat(91);
         DescriptionMaxSizeExceededException exception = assertThrows(DescriptionMaxSizeExceededException.class,
                 () -> category.setDescription(longDescription));
-        assertEquals(DomainConstants.DESCRIPTION_MAX_SIZE_EXCEEDED, exception.getMessage());
+        assertEquals(CategoryDomainConstants.CATEGORY_DESCRIPTION_MAX_SIZE_EXCEEDED, exception.getMessage());
     }
 
     @Test
